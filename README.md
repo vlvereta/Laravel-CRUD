@@ -8,6 +8,7 @@ Start in CRUD Laravel.
 git clone <link to repositry>
 cd <repository_name>
 composer install
+cp .env.example .env
 php artisan key:generate
 ```
 
