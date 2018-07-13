@@ -21,6 +21,4 @@ Route::get('/admin/currencies', function () {
    return view('currencies', compact('currencies'));
 });
 
-Route::get('/admin', function () {
-    //
-})->middleware('currencies');
+Route::get('/admin')->middleware('currencies');

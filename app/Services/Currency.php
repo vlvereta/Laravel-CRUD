@@ -11,7 +11,7 @@ class Currency
     private $actualCourseDate;
     private $active;
 
-    public function __construct($id, $name, $shortName, $actualCourse, $actualCourseDate, $active)
+    public function __construct(?int $id, string $name, string $shortName, float $actualCourse, $actualCourseDate, bool $active)
     {
         $this->id = $id;
         $this->name = $name;
@@ -21,27 +21,33 @@ class Currency
         $this->active = $active;
     }
 
-    public function getId() {
+    public function getId() : ?int
+    {
         return $this->id;
     }
 
-    public function getName() {
+    public function getName() : string
+    {
         return $this->name;
     }
 
-    public function getShortName() {
+    public function getShortName() : string
+    {
         return $this->shortName;
     }
 
-    public function getActualCourse() {
+    public function getActualCourse() : float
+    {
         return $this->actualCourse;
     }
 
-    public function getActualCourseDate() {
+    public function getActualCourseDate()
+    {
         return $this->actualCourseDate;
     }
 
-    public function isActive() {
+    public function isActive() : bool
+    {
         return $this->active;
     }
 }

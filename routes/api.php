@@ -19,8 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('currencies', 'ApiController@showActiveCurrencies');
 
-Route::get('currencies/{id}', 'ApiController@showCurrencyById')
-    ->where('id', '[0-9]+');
+Route::get('currencies/{id}', 'ApiController@showCurrencyById');
 
 Route::prefix('admin')->group(function () {
     Route::resource('/currencies', 'AdminController',

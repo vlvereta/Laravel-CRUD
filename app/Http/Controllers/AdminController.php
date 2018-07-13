@@ -23,12 +23,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $jsonCurrencies = array();
-        $Currencies = $this->repository->findAll();
-        foreach ($Currencies as $currency) {
-            $jsonCurrencies[] = CurrencyPresenter::present($currency);
-        }
-        return response()->json($jsonCurrencies);
+        return response()->json(CurrencyPresenter::presentCollection($this->repository->findAll()));
     }
 
     /**
@@ -39,15 +34,14 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        $this->repository->save(new Currency(
-            $request->get('id'),
+        $this->repository->save(new Currency(null,
             $request->get('name'),
             $request->get('short_name'),
             $request->get('actual_course'),
             $request->get('actual_course_date'),
             $request->get('active')
         ));
-        return $this->index();
+        return response()->json(CurrencyPresenter::presentCollection($this->repository->findAll()));
     }
 
     /**
@@ -82,9 +76,9 @@ class AdminController extends Controller
             'actual_course_date' => $request->has('actual_course_date') ? $request->get('actual_course_date') : $currency->getActualCourseDate(),
             'active' => $request->has('active') ? $request->get('active') : $currency->isActive()
         );
-        $this->destroy($id);
+        $this->repository->delete($currency);
         $this->repository->save(new Currency($id, $result['name'], $result['short_name'], $result['actual_course'], $result['actual_course_date'], $result['active']));
-        return $this->index();
+        return response()->json(CurrencyPresenter::presentCollection($this->repository->findAll()));
     }
 
     /**
@@ -100,6 +94,6 @@ class AdminController extends Controller
         } else {
             $this->repository->delete($currency);
         }
-        return $this->index();
+        return response()->json(CurrencyPresenter::presentCollection($this->repository->findAll()));
     }
 }

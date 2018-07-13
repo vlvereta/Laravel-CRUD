@@ -15,4 +15,13 @@ class CurrencyPresenter
             'active' => $currency->isActive()
         );
     }
+
+    public static function presentCollection(array $currencies): array
+    {
+        $jsonCurrencies = array();
+        foreach ($currencies as $currency) {
+            $jsonCurrencies[] = CurrencyPresenter::present($currency);
+        }
+        return $jsonCurrencies;
+    }
 }
