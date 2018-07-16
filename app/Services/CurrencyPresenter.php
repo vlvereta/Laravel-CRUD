@@ -18,10 +18,10 @@ class CurrencyPresenter
 
     public static function presentCollection(array $currencies): array
     {
-        $jsonCurrencies = array();
+        $json = [];
         foreach ($currencies as $currency) {
-            $jsonCurrencies[] = CurrencyPresenter::present($currency);
+            $json[] = CurrencyPresenter::present($currency);
         }
-        return $jsonCurrencies;
+        return $json;
     }
 }

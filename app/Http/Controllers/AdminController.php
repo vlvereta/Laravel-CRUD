@@ -11,9 +11,9 @@ class AdminController extends Controller
 {
     private $repository;
 
-    public function __construct()
+    public function __construct(CurrencyRepositoryInterface $repository)
     {
-        $this->repository = app()->make(CurrencyRepositoryInterface::class);
+        $this->repository = $repository;
     }
 
     /**

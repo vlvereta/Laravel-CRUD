@@ -9,9 +9,9 @@ class ApiController extends Controller
 {
     private $repository;
 
-    public function __construct()
+    public function __construct(CurrencyRepositoryInterface $repository)
     {
-        $this->repository = app()->make(CurrencyRepositoryInterface::class);
+        $this->repository = $repository;
     }
 
     public function showActiveCurrencies() {
@@ -25,8 +25,9 @@ class ApiController extends Controller
 
     public function showCurrencyById($id) {
         $currency = $this->repository->findById($id);
-        if (!$currency)
+        if (!$currency) {
             abort(404);
+        }
         return response()->json(CurrencyPresenter::present($currency));
     }
 }
